@@ -4,12 +4,11 @@ import { ToastProvider } from 'react-toast-notifications'
 
 import createProvider from './components/Error/ErrorBoundary'
 import MainView from './components/MainView'
-// import { IContainerOffsets } from './store/ducks/configs'
 import rootReducer from './store/rootReducer'
 import rootSaga from './store/rootSaga'
 
 // const tagManagerArgs = {
-//   gtmId: 'GTM-5CSHQ6S'
+//   gtmId: ''
 // }
 
 const AppProvider = createProvider(rootReducer, rootSaga)
