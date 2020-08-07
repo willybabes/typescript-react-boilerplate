@@ -1,32 +1,11 @@
-"use strict"
+const webpackMerge = require('webpack-merge')
+const common = require('./webpack/webpack.common')
 
-const path = require("path")
-
-module.exports = {
-  // Set debugging source maps to be "inline" for simplicity and ease of use
-  devtool: "inline-source-map",
-
-  // App entry point
-  entry: "./src/index.tsx",
-
-  // Where to compile the bundle
-  // Default is dist
-  output: {
-    filename: "bundle.js"
-  },
-
-  // File loaders
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: "ts-loader"
-      }
-    ]
-  },
-
-  // File extensions to support resolving
-  resolve: {
-    extensions: [".ts", ".tsx", ".js"]
-  }
+const envs = {
+  development: 'dev',
+  production: 'prod'
 }
+
+const env = envs[process.env.NODE_ENV || 'development']
+const envConfig = require(`./webpack/webpack.${env}.js`)
+module.exports = webpackMerge(common, envConfig)
